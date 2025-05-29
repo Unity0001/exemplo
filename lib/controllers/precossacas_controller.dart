@@ -2,6 +2,10 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class PrecossacasController {
+  final http.Client client;
+
+  PrecossacasController({required this.client});
+
   final String _apiKey = 'AIzaSyDVTJUPZBpyMIVG8pJtxnkDPZxLkHGnbBo';
   final String _baseUrl =
       'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=';
@@ -21,7 +25,7 @@ class PrecossacasController {
       ],
     });
 
-    final response = await http.post(uri, headers: headers, body: body);
+    final response = await client.post(uri, headers: headers, body: body);
 
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);

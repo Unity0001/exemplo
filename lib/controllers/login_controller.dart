@@ -4,11 +4,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../models/user_login.dart';
 
 class LoginController {
+  final http.Client client;
+
+  LoginController({required this.client});
+
   Future<bool> login(UserLogin user) async {
     final url = Uri.parse('http://52.91.106.224:4040/login');
 
     try {
-      final response = await http.post(
+      final response = await client.post(
         url,
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode(user.toJson()),

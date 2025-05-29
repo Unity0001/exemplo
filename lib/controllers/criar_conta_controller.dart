@@ -12,6 +12,10 @@ class CriarContaController {
   final confirmarSenhaController = TextEditingController();
   final telefoneController = TextEditingController();
 
+  final http.Client client;
+
+  CriarContaController({required this.client});
+
   void dispose() {
     nomeController.dispose();
     emailController.dispose();
@@ -22,7 +26,7 @@ class CriarContaController {
 
   Future<bool?> enviarDados(UserModel user) async {
     try {
-      final response = await http.post(
+      final response = await client.post(
         Uri.parse('http://52.91.106.224:4040/create'),
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode(user.toJson()),
