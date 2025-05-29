@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class DrawerWidget extends StatelessWidget {
   final String nome;
   final String email;
 
-  // Construtor
   DrawerWidget({required this.nome, required this.email});
 
   @override
@@ -13,60 +14,80 @@ class DrawerWidget extends StatelessWidget {
       child: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
-          // Cabeçalho do Drawer
           UserAccountsDrawerHeader(
             decoration: BoxDecoration(
               color: Colors.green,
             ),
-            accountName: Text(nome),
-            accountEmail: Text(email),
+            accountName: Text(
+              nome,
+              style: GoogleFonts.quicksand(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            accountEmail: Text(
+              email,
+              style: GoogleFonts.quicksand(fontSize: 16),
+            ),
             currentAccountPicture: CircleAvatar(
               backgroundColor: Colors.white,
               child: Text(
-                nome.isNotEmpty
-                    ? nome[0].toUpperCase()
-                    : '', // Primeira letra do nome
-                style: TextStyle(fontWeight: FontWeight.bold),
+                nome.isNotEmpty ? nome[0].toUpperCase() : '',
+                style: GoogleFonts.quicksand(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 24,
+                ),
               ),
             ),
           ),
           ListTile(
-            leading: Icon(Icons.home),
-            title: Text('Ínicio'),
+            leading: Icon(FontAwesomeIcons.houseChimneyUser),
+            title: Text(
+              'Ínicio',
+              style: GoogleFonts.quicksand(fontWeight: FontWeight.bold),
+            ),
             onTap: () {
               Navigator.of(context).pushNamed('/menuScreen');
             },
           ),
           ListTile(
-            leading: Icon(Icons.settings),
-            title: Text('Configurações'),
-            onTap: () {
-              Navigator.of(context).pushNamed('/configuracoes');
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.logout),
-            title: Text('Sair'),
+            leading: Icon(FontAwesomeIcons.arrowLeftLong),
+            title: Text(
+              'Sair',
+              style: GoogleFonts.quicksand(fontWeight: FontWeight.bold),
+            ),
             onTap: () {
               showDialog(
                 context: context,
                 builder: (BuildContext context) {
                   return AlertDialog(
-                    title: Text('Confirmar saída'),
-                    content: Text('Tem certeza que deseja sair? Será necessário efetuar o login novamente.'),
+                    title: Text(
+                      'Confirmar saída',
+                      style: GoogleFonts.quicksand(fontWeight: FontWeight.bold),
+                    ),
+                    content: Text(
+                      'Tem certeza que deseja sair? Será necessário efetuar o login novamente.',
+                      style: GoogleFonts.quicksand(fontWeight: FontWeight.w800),
+                    ),
                     actions: <Widget>[
                       TextButton(
-                        child: Text('Cancelar'),
+                        child: Text(
+                          'Cancelar',
+                          style: GoogleFonts.quicksand(fontWeight: FontWeight.w800),
+                        ),
                         onPressed: () {
-                          Navigator.of(context).pop(); // Fecha o dialog
+                          Navigator.of(context).pop();
                         },
                       ),
                       TextButton(
-                        child: Text('Sair'),
+                        child: Text(
+                          'Sair',
+                          style: GoogleFonts.quicksand(fontWeight: FontWeight.w800),
+                        ),
                         onPressed: () {
-                          Navigator.of(context).pop(); // Fecha o dialog
-                          Navigator.of(context).pop(); // Fecha o Drawer
-                          Navigator.pushNamed(context,'/');
+                          Navigator.of(context).pop();
+                          Navigator.of(context).pop();
+                          Navigator.pushNamed(context, '/');
                         },
                       ),
                     ],

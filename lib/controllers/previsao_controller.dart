@@ -5,7 +5,6 @@ import 'package:smart_agro/models/previsao_dia.dart';
 class PrevisaoController {
   final String _accuWeatherApiKey = 'uQw1g53Te5WAooFGMmcyXJ3zC7lZoZs6';
 
-  // 1. Método para buscar a cityKey pelo nome da cidade
   Future<String?> buscarCityKey(String nomeCidade) async {
     final url = Uri.parse(
       'http://dataservice.accuweather.com/locations/v1/cities/search'
@@ -17,14 +16,13 @@ class PrevisaoController {
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body) as List;
       if (data.isNotEmpty) {
-        return data[0]['Key']; // Retorna o código da primeira cidade encontrada
+        return data[0]['Key'];
       }
     }
     print('Erro ao buscar cityKey: ${response.body}');
     return null;
   }
 
-  // 2. Método para buscar previsão de 5 dias usando cityKey
   Future<List<PrevisaoDia>> buscarPrevisao5Dias(String cityKey) async {
     final url = Uri.parse(
       'http://dataservice.accuweather.com/forecasts/v1/daily/5day/$cityKey'

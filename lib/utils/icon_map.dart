@@ -1,61 +1,43 @@
-import 'package:weather_icons/weather_icons.dart';
 import 'package:flutter/material.dart';
 
-/// Mapeia o código OpenWeather para o ícone do weather_icons.
-IconData obterIcone(String codigo) {
-  switch (codigo) {
-    case '01d': return WeatherIcons.day_sunny;
-    case '01n': return WeatherIcons.night_clear;
-    case '02d':
-    case '02n': return WeatherIcons.cloudy;
-    case '03d':
-    case '03n':
-    case '04d':
-    case '04n': return WeatherIcons.cloud;
-    case '09d':
-    case '09n':
-    case '10d':
-    case '10n': return WeatherIcons.rain;
-    case '11d':
-    case '11n': return WeatherIcons.thunderstorm;
-    case '13d':
-    case '13n': return WeatherIcons.snow;
-    case '50d':
-    case '50n': return WeatherIcons.fog;
-    default: return WeatherIcons.na;
-  }
-}
+/// Mapeia código OpenWeather (ex: '01d') para código AccuWeather (1 a 44)
+final Map<String, int> openToAccuMap = {
+  '01d': 1,   // Ensolarado
+  '01n': 33,  // Noite clara
+  '02d': 3,   // Poucas nuvens dia
+  '02n': 35,  // Poucas nuvens noite
+  '03d': 6,
+  '03n': 36,
+  '04d': 7,
+  '04n': 38,
+  '09d': 12,
+  '09n': 39,
+  '10d': 13,
+  '10n': 40,
+  '11d': 15,
+  '11n': 41,
+  '13d': 22,
+  '13n': 43,
+  '50d': 19,
+  '50n': 20,
+};
 
-/// Cor por condição climática
-Color obterCor(String codigo) {
-  switch (codigo) {
-    case '01d': // sol dia
-      return Colors.amber;
-    case '01n': // céu claro à noite
-      return Colors.indigoAccent;
-    case '02d':
-    case '02n': // poucas nuvens
-      return Colors.grey.shade400;
-    case '03d':
-    case '03n':
-    case '04d':
-    case '04n': // nublado
-      return Colors.blueGrey;
-    case '09d':
-    case '09n':
-    case '10d':
-    case '10n': // chuva
-      return Colors.blue;
-    case '11d':
-    case '11n': // tempestade
-      return Colors.deepPurple;
-    case '13d':
-    case '13n': // neve
-      return Colors.lightBlueAccent;
-    case '50d':
-    case '50n': // névoa
-      return Colors.brown.shade200;
-    default:
-      return Colors.black87;
+Widget obterIcone(String codigo, {double size = 30.0}) {
+  final int? accuweatherCode = openToAccuMap[codigo];
+  if (accuweatherCode == null) {
+    return const Icon(Icons.help_outline);
   }
+
+  final String assetPath = 'assets/images/$accuweatherCode.png';
+  return SizedBox(
+    width: size,
+    height: size,
+    child: FittedBox(
+      fit: BoxFit.contain,
+      child: Image.asset(
+        assetPath,
+        scale: 0.1,
+      ),
+    ),
+  );
 }

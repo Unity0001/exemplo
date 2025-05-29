@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CustomButton extends StatelessWidget {
   final String text;
@@ -16,6 +17,12 @@ class CustomButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final defaultTextStyle = GoogleFonts.quicksand(
+      fontSize: 18,
+      fontWeight: FontWeight.w700,
+      color: Colors.white,
+    );
+
     return SizedBox(
       width: double.infinity,
       height: 50,
@@ -27,36 +34,23 @@ class CustomButton extends StatelessWidget {
           ),
         ),
         onPressed: onPressed,
-        child:
-            icon != null
-                ? Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(icon, color: Colors.white),
-                    const SizedBox(width: 8),
-                    Text(
-                      text,
-                      style:
-                          textStyle ??
-                          const TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w800,
-                            color: Colors.white,
-                          ),
-                    ),
-                  ],
-                )
-                : Text(
-                  text,
-                  style:
-                      textStyle ??
-                      const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w800,
-                        color: Colors.white,
-                      ),
-                ),
+        child: icon != null
+            ? Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(icon, color: Colors.white),
+                  const SizedBox(width: 8),
+                  Text(
+                    text,
+                    style: textStyle ?? defaultTextStyle,
+                  ),
+                ],
+              )
+            : Text(
+                text,
+                style: textStyle ?? defaultTextStyle,
+              ),
       ),
     );
   }

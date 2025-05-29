@@ -37,7 +37,7 @@ class _NovaSenhaPageState extends State<NovaSenhaPage> {
 
       try {
         final response = await http.post(
-          Uri.parse('http://52.91.106.224:4040/enviar-nova-senha'),
+          Uri.parse('http://3.84.141.2:4040/enviar-nova-senha'),
           headers: {'Content-Type': 'application/json'},
           body: jsonEncode(body),
         );
@@ -81,7 +81,7 @@ class _NovaSenhaPageState extends State<NovaSenhaPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image.asset('assets/images/logo.jpg', height: 150),
+                Image.asset('assets/images/logo.png', height: 150),
                 const SizedBox(height: 20),
                 const Text(
                   'AgroSmart',

@@ -34,7 +34,7 @@ class _ConfiguracoesScreenState extends State<ConfiguracoesScreen> {
           padding: const EdgeInsets.all(20),
           child: Column(
             children: [
-              Image.asset('assets/images/logo.jpg', height: 100),
+              Image.asset('assets/images/logo.png', height: 100),
               const SizedBox(height: 10),
               const Text(
                 'AgroSmart',

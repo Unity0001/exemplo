@@ -4,6 +4,7 @@ import 'package:smart_agro/screens/configuracoes_screen.dart';
 import 'package:smart_agro/screens/login_screen.dart';
 import 'package:smart_agro/screens/nova_senha.dart';
 import 'package:smart_agro/screens/precossacas_screen.dart';
+import 'package:smart_agro/screens/preencher_formulario_screen.dart';
 import 'package:smart_agro/screens/previsao_tempo.dart';
 import 'package:smart_agro/screens/recuperar_conta.dart';
 import 'package:smart_agro/screens/tela_plantacao.dart';
@@ -36,6 +37,7 @@ class SmartAgro extends StatelessWidget {
         '/enviar-nova-senha': (context) => NovaSenhaPage(),
         '/previsao-tempo': (context) => TelaPrevisao(),
         '/configuracoes' : (context) => ConfiguracoesScreen(),
+        '/preencher-formulario' : (context) => PreencherFormularioScreen(),
       },
     );
   }

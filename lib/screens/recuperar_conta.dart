@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../controllers/recuperar_conta_controller.dart';
 import '../widgets/custom_button.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class RecuperarConta extends StatefulWidget {
   const RecuperarConta({Key? key}) : super(key: key);
@@ -32,6 +33,11 @@ class _RecuperarContaState extends State<RecuperarConta> {
     }
   }
 
+  final telefoneMask = MaskTextInputFormatter(
+    mask: '+## (##) #####-####',
+    filter: {"#": RegExp(r'[0-9]')},
+  );
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,7 +49,7 @@ class _RecuperarContaState extends State<RecuperarConta> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image.asset('assets/images/logo.jpg', height: 150),
+                Image.asset('assets/images/logo.png', height: 150),
                 const SizedBox(height: 20),
                 const Text(
                   'AgroSmart',
@@ -91,6 +97,7 @@ class _RecuperarContaState extends State<RecuperarConta> {
                     }
                     return null;
                   },
+                  inputFormatters: [telefoneMask],
                 ),
                 const SizedBox(height: 20),
 

@@ -31,13 +31,17 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Future<void> _obterCidade() async {
     bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
-    if (!serviceEnabled) return;
+    if (!serviceEnabled) {
+      print('Serviço de localização desativado');
+      return;
+    }
 
     LocationPermission permission = await Geolocator.checkPermission();
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.denied ||
           permission == LocationPermission.deniedForever) {
+        print('Permissão negada');
         return;
       }
     }
@@ -47,16 +51,22 @@ class _LoginScreenState extends State<LoginScreen> {
         desiredAccuracy: LocationAccuracy.high,
       );
 
+      print('Lat: ${position.latitude}, Lng: ${position.longitude}');
+
       List<Placemark> placemarks = await placemarkFromCoordinates(
         position.latitude,
         position.longitude,
       );
 
+      print('Placemarks: $placemarks');
+
       if (placemarks.isNotEmpty) {
-        String cidade = placemarks.first.locality ?? '';
+        String cidade = placemarks.first.locality ?? 'Desconhecida';
         final prefs = await SharedPreferences.getInstance();
         await prefs.setString(_cidadeKey, cidade);
         print('Cidade salva: $cidade');
+      } else {
+        print('Nenhum placemark encontrado');
       }
     } catch (e) {
       print('Erro ao obter cidade: $e');
@@ -118,7 +128,7 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image.asset('assets/images/logo.jpg', height: 150),
+                Image.asset('assets/images/logo.png', height: 150),
                 const SizedBox(height: 20),
                 const Text(
                   'AgroSmart',

@@ -14,7 +14,7 @@ class ResetSenha extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset('assets/images/logo.jpg', height: 150),
+              Image.asset('assets/images/logo.png', height: 150),
               const SizedBox(height: 20),
               const Text(
                 'AgroSmart',

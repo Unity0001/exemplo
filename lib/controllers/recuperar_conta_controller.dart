@@ -23,7 +23,7 @@ class RecuperarContaController {
 
     try {
       final response = await http.post(
-        Uri.parse('http://52.91.106.224:4040/recuperar-senha'),
+        Uri.parse('http://3.84.141.2:4040/recuperar-senha'),
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode(body),
       );
